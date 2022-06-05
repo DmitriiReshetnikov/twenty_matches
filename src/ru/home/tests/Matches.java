@@ -16,6 +16,10 @@ public class Matches {
         return currentMatchesRemainder;
     }
 
+    public int getMoveMatchesQuantity() {
+        return moveMatchesQuantity;
+    }
+
     public void setMoveMatchesQuantity(int moveMatchesQuantity) {
         this.moveMatchesQuantity = moveMatchesQuantity;
     }
@@ -28,16 +32,12 @@ public class Matches {
         return (4 - this.moveMatchesQuantity);
     }
 
-    public void printCurrentMatchesReminder(){
-        System.out.println("На столе осталось " + this.currentMatchesRemainder + " спичек");
-    }
-
-    public void computerMove(){
-        this.makeAMove();
-        System.out.println(" - Количество выбранных компьютером спичек = " + this.moveMatchesQuantity);
-    }
-
-    public void userMove(){
-        this.makeAMove();
-    }
+//    public void computerMove(){
+//        this.makeAMove();
+//        new Console().computerMovedMessage(this.moveMatchesQuantity);
+//    }
+//
+//    public void userMove(){
+//        this.makeAMove();
+//    }
 }

@@ -1,36 +1,26 @@
 package ru.home.tests;
 
-import java.util.Scanner;
-
 public class Application {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Matches matches = new Matches(Matches.MAX_MATCHES, Matches.FIRST_MOVE_MATCHES);
-        matches.printCurrentMatchesReminder();
-        matches.computerMove();
+        Console console = new Console();
+
+        console.currentMatchesReminderMessage(matches.getCurrentMatchesRemainder());
+        matches.makeAMove();
+        console.computerMovedMessage(matches.getMoveMatchesQuantity());
+
         while (matches.getCurrentMatchesRemainder() > 1) {
-            matches.printCurrentMatchesReminder();
-            while (true){
-                System.out.print(" - Ход игрока. Введите количество спичек: ");
-                if (scanner.hasNextInt()){
-                    int quantity = scanner.nextInt();
-                    if ((quantity >= 1) && (quantity < 4)) {
-                        matches.setMoveMatchesQuantity(quantity);
-                        break;
-                    } else {
-                        System.out.println("Вы ввели неверное значение. Попробуйте ещё раз!");
-                    }
-                }else {
-                    scanner.next();
-                    System.out.println("Необходимо ввести число от 1-го до 3-х.");
-                }
-            }
-            matches.userMove();
+            console.currentMatchesReminderMessage(matches.getCurrentMatchesRemainder());
+            matches.setMoveMatchesQuantity(console.getUserMatchesQuantity());
+            matches.makeAMove();
+
+            console.currentMatchesReminderMessage(matches.getCurrentMatchesRemainder());
             matches.setMoveMatchesQuantity(matches.findMatchesForNextMove());
-            matches.printCurrentMatchesReminder();
-            matches.computerMove();
+            matches.makeAMove();
+            console.computerMovedMessage(matches.getMoveMatchesQuantity());
+
             if (matches.getCurrentMatchesRemainder() == 1){
-                System.out.println("Для игрока осталась последняя спичка. Игрок проиграл!");
+                console.gameOverMessage();
             }
         }
     }
